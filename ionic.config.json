@@ -1,0 +1,7 @@
+{
+  "name": "Web_Mobile_CA_2025_ExpenseTracker_20070234_B9IS126",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
