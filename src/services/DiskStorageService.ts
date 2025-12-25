@@ -40,5 +40,20 @@ export class DiskStorageService {
       return [];
     }
   }
+
+  static async saveEntries(data: Entry[]) {
+    try {
+        await Filesystem.writeFile({
+        path: DiskStorageService.FILE_NAME,
+        data: JSON.stringify(data),
+        directory: this.DEFAULT_DIR,
+        encoding: Encoding.UTF8,
+      });
+      console.log(`${DiskStorageService.FILE_NAME} saved successfully.`);      
+    } catch (error) {
+      console.error("Error saving file:", error);
+      throw error;
+    }
+  }
 }
 
