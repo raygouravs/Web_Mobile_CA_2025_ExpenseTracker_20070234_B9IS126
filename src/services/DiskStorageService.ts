@@ -67,7 +67,9 @@ export class DiskStorageService {
     let monthly_data_dict = await this.loadPastData();
     olderEntries.forEach((e) => {
       const e_date_month = Number(e.date.split("-")[1]);
-      monthly_data_dict[e_date_month] = monthly_data_dict[e_date_month] + e.amount;
+      const currentTotal = monthly_data_dict[e_date_month] || 0;
+      const newTotal = currentTotal + e.amount;
+      monthly_data_dict[e_date_month] = Number(newTotal.toFixed(2));
     });
     //MARK: save older entries to separate json file here !!!
     try {

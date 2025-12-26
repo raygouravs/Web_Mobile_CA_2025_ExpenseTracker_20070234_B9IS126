@@ -58,7 +58,7 @@ export default function EntryListView(props: { entries: Entry[], setEntries: any
               </p>
               
               <h2 style={{ fontWeight: '700', color: '#000', fontSize: '1.1rem', marginBottom: '4px' }}>
-                {e.type.toUpperCase()} — €{e.amount}
+                {e.type.toUpperCase()} — €{e.amount.toFixed(2)}
               </h2>
 
               {e.expense_category && (
