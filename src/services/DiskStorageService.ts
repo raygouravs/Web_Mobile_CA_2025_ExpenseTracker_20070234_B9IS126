@@ -23,7 +23,7 @@ export class DiskStorageService {
     const todaysDate: string = new Date().toISOString().split('T')[0];
     // "2025-12-26"
     const currentYear: string = todaysDate.split("-")[0];
-    const previousYear: Number = Number(currentYear) - 1;
+    const previousYear: number = Number(currentYear) - 1;
     return this.PAST_DATA_FILE_NAME_PREFIX + String(previousYear) + '.json';
   }
 
