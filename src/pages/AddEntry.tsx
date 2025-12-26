@@ -7,7 +7,7 @@ import {
   IonSelectOption, IonLabel, IonItem, IonDatetime, 
   useIonRouter
 } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DiskStorageService } from '../services/DiskStorageService';
 import { VibrationService } from '../services/VibrationService';
@@ -19,6 +19,7 @@ export default function AddEntry({ history }: any) {
   const [source, setSource] = useState('');
   const [date, setDate] = useState(new Date().toISOString());
   const [description, setDescription] = useState('');
+  const [mindate, setMindate] = useState('');
   const ionRouter = useIonRouter();
 
   function close() {
@@ -71,7 +72,15 @@ export default function AddEntry({ history }: any) {
   }
 };
 
-  return (
+useEffect(() => {
+   const todaysDate: string = new Date().toISOString().split('T')[0];
+   const year: string = todaysDate.split("-")[0];
+   const month: string = todaysDate.split("-")[1];
+   const dat: string = "01";
+   setMindate(year+'-'+month+'-'+dat);
+}, []);
+
+return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -117,6 +126,7 @@ export default function AddEntry({ history }: any) {
               color='warning'
               presentation="date"
               value={date}
+              min={mindate}
               max={new Date().toISOString()}
               onIonChange={handleDateSave}
             />
