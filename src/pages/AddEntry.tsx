@@ -106,6 +106,10 @@ return (
             style={{
               '--background': '#e0e0e0',
               '--border-radius': '8px',
+              '--color': '#ffc409',
+              '--label-color': '#ffc409',
+              '--highlight-color-focused': '#ffc409',
+              '--highlight-color-valid': '#ffc409',
               'fontWeight': 'bold',
               'margin-top': '10px'
             } as React.CSSProperties}>
@@ -168,6 +172,10 @@ return (
             style={{
               '--background': '#e0e0e0',
               '--border-radius': '8px',
+              '--color': '#ffc409',
+              '--label-color': '#ffc409',
+              '--highlight-color-focused': '#ffc409',
+              '--highlight-color-valid': '#ffc409',
               'fontWeight': 'bold',
               'margin-top': '10px'
             } as React.CSSProperties}>  
@@ -200,6 +208,10 @@ return (
             style={{
               '--background': '#e0e0e0',
               '--border-radius': '8px',
+              '--color': '#ffc409',
+              '--label-color': '#ffc409',
+              '--highlight-color-focused': '#ffc409',
+              '--highlight-color-valid': '#ffc409',
               'fontWeight': 'bold',
               'margin-top': '10px'
             } as React.CSSProperties}>
