@@ -180,6 +180,7 @@ return (
               'margin-top': '10px'
             } as React.CSSProperties}>  
               <IonSelectOption value="bills">Bills & Fees</IonSelectOption>
+              <IonSelectOption value="houserent">House Rent</IonSelectOption>
               <IonSelectOption value="food">Food & Drink</IonSelectOption>
               <IonSelectOption value="groceries">Groceries</IonSelectOption>
               <IonSelectOption value="shopping">Shopping</IonSelectOption>
