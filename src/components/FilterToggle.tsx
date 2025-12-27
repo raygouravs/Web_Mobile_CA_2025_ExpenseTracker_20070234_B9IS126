@@ -3,7 +3,7 @@
 */
 
 import React from 'react';
-import { IonIcon, IonLabel, IonSegment, IonSegmentButton, SegmentChangeEventDetail } from '@ionic/react';
+import { IonItem, IonIcon, IonLabel, IonSegment, IonSegmentButton, SegmentChangeEventDetail } from '@ionic/react';
 import { filter } from 'ionicons/icons';
 
 function FilterToggle(props: { value: string, onChange: any }) {
@@ -16,6 +16,11 @@ function FilterToggle(props: { value: string, onChange: any }) {
 
   return (
     <>
+      <IonIcon 
+        icon={filter} 
+        style={{ fontSize: '24px' }} 
+        color='dark'
+      />
       <IonSegment mode='ios' value={props.value} onIonChange={handleSegmentChange}>
         <IonSegmentButton value="expense">
           <IonLabel>Expense</IonLabel>
