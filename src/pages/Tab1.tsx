@@ -5,7 +5,8 @@
 import {
   IonPage, IonHeader, IonToolbar, IonTitle,
   IonContent, IonFab, IonFabButton, IonIcon,
-  useIonRouter, IonItem
+  useIonRouter, IonItem,
+  IonLabel
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
@@ -50,6 +51,11 @@ export default function Tab1() {
         <FilterToggle value={filter} onChange={setFilter} />
       </IonItem>
       <IonContent color='light'>
+        {entries.length === 0 && (
+          <IonItem>
+            <IonLabel className="ion-text-wrap" color='warning'>No entries to show. Use the + button to add some entries!</IonLabel>
+          </IonItem>
+        )}
         <EntryListView entries={sortedEntries} setEntries={setEntries}/>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton onClick={() => ionRouter.push('/add', 'forward')} color='warning'>
