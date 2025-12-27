@@ -1,3 +1,7 @@
+/*
+  REFERENCE: NPM (2025) react-chartjs-2 docs. Available at: https://www.npmjs.com/package/react-chartjs-2
+*/
+
 import React, { useEffect } from 'react';
 import { IonContent, IonIcon, IonItem, IonLabel, IonSegment, IonSegmentButton, SegmentChangeEventDetail } from '@ionic/react';
 import WalletSegmentToggle from './WalletSegmentToggle';
@@ -57,7 +61,23 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
       {filter === 'cashflow' && (
         // show bar chart for Month v/s Cash-flow
         <div style={{ overflowX: 'auto' }}>
-            <Bar data={bgraphdata} />
+            <Bar data={bgraphdata} options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      ticks: {
+                        callback: (tickValue: string | number) => {
+                          const value =
+                            typeof tickValue === 'string' ? Number(tickValue) : tickValue;
+
+                          return `€${value.toLocaleString()}`;
+                        },
+                      },
+                    },
+                  },
+                }}/>
         </div>
       )}
 
@@ -73,23 +93,23 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
             <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Total Income:
             </IonLabel>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='success'>
-              {props.totalIncome}
+            <IonLabel style={{ fontSize: '1.3rem', fontWeight: 'bold' }} color='success'>
+              € {props.totalIncome}
             </IonLabel>
           </IonItem>
           <IonItem>
             <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Total Expenses:
             </IonLabel>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='danger'>
-              {props.totalExpenses}
+            <IonLabel style={{ fontSize: '1.3rem', fontWeight: 'bold' }} color='danger'>
+              € {props.totalExpenses}
             </IonLabel>
           </IonItem>
           <IonItem>
             <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Wallet Balance:
             </IonLabel>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold', color: (Number(props.totalIncome)-Number(props.totalExpenses)) >= 0 ? 'var(--ion-color-success, green)' : 'var(--ion-color-danger, red)'}}>
+            <IonLabel style={{ fontSize: '1.3rem', fontWeight: 'bold', color: (Number(props.totalIncome)-Number(props.totalExpenses)) >= 0 ? 'var(--ion-color-success, green)' : 'var(--ion-color-danger, red)'}}>
               € {(Number(props.totalIncome)-Number(props.totalExpenses)) < 0 ? '-' : ''}{Number(props.totalIncome)-Number(props.totalExpenses)}
             </IonLabel>
           </IonItem>

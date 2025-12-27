@@ -28,6 +28,7 @@ export default function Tab2() {
       entries.filter(e => e.type === 'expense').forEach((e) => {
         expense = expense + e.amount;
       });
+      let cash_flow = income-expense;
 
       //past data
       const past_data = await DiskStorageService.loadPastData();
@@ -36,7 +37,7 @@ export default function Tab2() {
         s = s + month_balance;
         return s;
       }, 0)
-      total_wealth = total_wealth + cashflow;
+      total_wealth = total_wealth + cash_flow;
 
       let t_income = Object.values(past_data).reduce((s, month) => {
         s = s + month.income;
@@ -56,12 +57,12 @@ export default function Tab2() {
         const monthly_cashflow = e.income - e.expense;
         mcf.push(monthly_cashflow);
       })
-      mcf.push(cashflow);
+      mcf.push(cash_flow);
 
       //set all state
       setIncome(income);
       setExpense(expense);
-      setCashflow(income - expense);
+      setCashflow(cash_flow);
       setTotalwealth(total_wealth);
       setTincome(t_income);
       setTexpense(t_expense);
