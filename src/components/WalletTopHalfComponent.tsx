@@ -40,7 +40,6 @@ interface BarData {
 function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: string, monthlycashflow: number[] }) {
 
   const [filter, setFilter] = useState('cashflow');
-  const [balance, setBalance] = useState(0);
   const [bgraphdata, setBgraphdata] = useState<BarData>({
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [
@@ -51,12 +50,7 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
         },
       ],
     });
-
-  useEffect(() => {
-    const bal = Number(props.totalIncome) - Number(props.totalExpenses);
-    setBalance(bal);
-  }, []);
-
+    
   return (
     <>
       <WalletSegmentToggle value={filter} onChange={setFilter} />
@@ -74,9 +68,9 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
         // Total income = ---
         // Total expenses = ---
         // Wallet balance = --- [green/red color text]
-        <div className="ion-padding ion-text-center" style={{backgroundColor: 'lightskyblue', borderRadius: '5px'}}>
+        <div className="ion-padding ion-text-center" style={{backgroundColor: 'lightgoldenrodyellow', borderRadius: '5px'}}>
           <IonItem>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='warning'>
+            <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Total Income:
             </IonLabel>
             <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='success'>
@@ -84,7 +78,7 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
             </IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='warning'>
+            <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Total Expenses:
             </IonLabel>
             <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='danger'>
@@ -92,11 +86,11 @@ function WalletTopHalfComponent(props: { totalIncome: string, totalExpenses: str
             </IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold' }} color='warning'>
+            <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }} color='warning'>
               Wallet Balance:
             </IonLabel>
-            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold', color: balance >= 0 ? 'var(--ion-color-success, green)' : 'var(--ion-color-danger, red)'}}>
-              € {balance < 0 ? '-' : ''}{balance}
+            <IonLabel style={{ fontSize: '1.5rem', fontWeight: 'bold', color: (Number(props.totalIncome)-Number(props.totalExpenses)) >= 0 ? 'var(--ion-color-success, green)' : 'var(--ion-color-danger, red)'}}>
+              € {(Number(props.totalIncome)-Number(props.totalExpenses)) < 0 ? '-' : ''}{Number(props.totalIncome)-Number(props.totalExpenses)}
             </IonLabel>
           </IonItem>
         </div>
