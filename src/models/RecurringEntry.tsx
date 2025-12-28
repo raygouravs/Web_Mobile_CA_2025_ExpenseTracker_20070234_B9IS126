@@ -9,7 +9,7 @@ export interface RecurringSchedule {
   period: RecurrencePeriod;
   startDate: string; //YYYY-MM-DD
   endDate?: string; //YYYY-MM-DD 
-  notificationDate: string; //YYYY-MM-DD 
+  notificationDates: string[]; //[YYYY-MM-DD] 
   timestamp: number;
 }
 

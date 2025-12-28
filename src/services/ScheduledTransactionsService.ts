@@ -29,6 +29,15 @@ export default class ScheduledTransactionsService {
         });
     }
 
+    //for saving an entire batch of schedules
+    static saveSchedulesBatch = async (schedules: RecurringSchedule[]) => {
+        await Preferences.set({
+            key: SCHEDULE_KEY,
+            value: JSON.stringify(schedules)
+        });
+        showToast(`Notifications batch updated!`, 'short')
+    }
+
     static deleteSchedule = async (id: string) => {
         const schedules = await this.loadSchedules();
         const filteredSchedules = schedules.filter(s => s.id !== id);
@@ -36,9 +45,10 @@ export default class ScheduledTransactionsService {
             key: SCHEDULE_KEY,
             value: JSON.stringify(filteredSchedules)
         });
-        const notif_id_to_delete = this.getNotificationIDBySchedID(id);
-        await LocalNotificationService.cancelNotification(Number(notif_id_to_delete));
-        showToast('Scheduled transaction deleted successfully!', 'short');
+        // delete the associated notification IDs
+        const notif_id_to_delete = this.getNotificationIDsBySchedID(id);
+        const notif_ids_batch = await notif_id_to_delete;
+        await LocalNotificationService.cancelBatchNotifications(notif_ids_batch);
     }
 
     //setting screen budget tracker
@@ -61,17 +71,17 @@ export default class ScheduledTransactionsService {
     }
 
     //store notification IDs
-    static saveNotificationID = async (schedID:string, notID:number) => {
+    static saveNotificationIDs = async (schedID:string, notIDs:number[]) => {
         await Preferences.set({
             key: schedID,
-            value: String(notID)
+            value: JSON.stringify(notIDs)
         });
     }
 
-    //fetch notification ID
-    static getNotificationIDBySchedID = async (schedID:string): Promise<string> => {
+    //fetch notification IDs
+    static getNotificationIDsBySchedID = async (schedID:string): Promise<number[]> => {
         const { value } = await Preferences.get({ key: schedID });
-        return value ?? '000';
+        return value ? JSON.parse(value) : [];
     }
 }
 

@@ -60,7 +60,7 @@ export default function ScheduleListView(props: { schedules: RecurringSchedule[]
               </p>
 
               <p style={{ fontSize: '0.95rem', color: '#666', marginBottom: '4px' }}>
-                🔔 Notification on: {formatDateString(e.notificationDate.split('T')[0])}
+                🔔 Notification on: {formatDateString(e.notificationDates[0].split('T')[0])}
               </p>
 
               {e.endDate && (

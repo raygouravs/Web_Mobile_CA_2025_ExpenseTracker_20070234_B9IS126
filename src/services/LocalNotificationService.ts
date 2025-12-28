@@ -28,7 +28,7 @@ export default class LocalNotificationService {
         }
    }
 
-    static scheduleReminder = async (description: string, notificationFireDate: string, schedID:string) => {
+    static scheduleReminders = async (description: string, notificationFireDates: string[], schedID:string) => {
         try {
 
             const hasPermission = await LocalNotificationService.checkNotificationPermission();
@@ -38,33 +38,39 @@ export default class LocalNotificationService {
             }
 
             const now = new Date();
+            let notification_id_array: number[] = [];
 
-            if (new Date(notificationFireDate) <= now) {
-                showToast('The reminder date has already passed, skipping notification.', 'short');
-                return; 
-            }
+            // ----------------------------------------------------------------------------------------
 
-            const notification_id = Math.floor(Math.random() * 1000000);
-            await LocalNotifications.schedule({
-                notifications: [
-                    {
-                        title: "Alert! Upcoming Transaction...",
-                        body: `Reminder: ${description} is due tomorrow!`,
-                        id: notification_id, 
-                        channelId: 'budget_alerts_high_v3',
-                        schedule: { 
-                            at: new Date(notificationFireDate),
-                            allowWhileIdle: true
-                        },
-                        sound: 'default',
-                        actionTypeId: "",
-                        extra: null
-                    }
-                ]
+            notificationFireDates.forEach(async (notification_fire_date) => {
+                if (new Date(notification_fire_date) <= now) {
+                    showToast('The reminder date has already passed, skipping notification.', 'short');
+                    return; 
+                }
+                const notification_id = Math.floor(Math.random() * 1000000);
+                await LocalNotifications.schedule({
+                    notifications: [
+                        {
+                            title: "Alert! Upcoming Transaction...",
+                            body: `Reminder: ${description} is due tomorrow!`,
+                            id: notification_id, 
+                            channelId: 'budget_alerts_high_v3',
+                            schedule: { 
+                                at: new Date(notification_fire_date),
+                                allowWhileIdle: true
+                            },
+                            sound: 'default',
+                            actionTypeId: "",
+                            extra: null
+                        }
+                    ]
+                });
+                notification_id_array.push(notification_id);
             });
-
-            await ScheduledTransactionsService.saveNotificationID(schedID, notification_id);
-            showToast(`Notification scheduled successfully for: ${notificationFireDate}`, 'short');
+                            
+            // ----------------------------------------------------------------------------------------------
+            await ScheduledTransactionsService.saveNotificationIDs(schedID, notification_id_array);
+            showToast(`Notifications scheduled successfully for the schedule!`, 'short');
 
         } catch (error) {
             console.error("Error in scheduling reminder:", error);
@@ -88,6 +94,7 @@ export default class LocalNotificationService {
         }); 
     }
 
+    // create notification channel (notification banner)
     static createNotificationChannel = async () => {
       await LocalNotifications.createChannel({
         id: 'budget_alerts_high_v3',
@@ -100,6 +107,21 @@ export default class LocalNotificationService {
       });
     }
 
+    //MARK: cancel a batch of local notifications 
+    static cancelBatchNotifications = async (ids: number[]) => { 
+        try {
+            const notificationsToCancel = ids.map(id => ({ id }));
+            await LocalNotifications.cancel({
+                notifications: notificationsToCancel
+            });
+            console.log(`${ids.length} notifications cancelled successfully.`);
+            showToast(`${ids.length} scheduled notifications cancelled successfully!`, 'short');
+        } catch (error) {
+            console.error("Failed to cancel notifications:", error);
+        }
+    }
+
+    // cancel notification
     static cancelNotification = async (id: number) => {
         await LocalNotifications.cancel({
             notifications: [{ id: id }]

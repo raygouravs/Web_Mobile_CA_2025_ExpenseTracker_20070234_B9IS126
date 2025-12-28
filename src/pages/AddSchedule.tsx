@@ -29,11 +29,37 @@ export default function AddSchedule({ history }: any) {
     ionRouter.goBack();
   }
 
-  const calculateNotificationDate = (startDateStr: string): string => {
+  /*
+  const calculateNotificationDate = (startDateStr: string, period:RecurrencePeriod): string => {
     const date = new Date(startDateStr);
     date.setDate(date.getDate() - 1);
     date.setHours(9, 0, 0); 
     return date.toISOString();
+  };*/
+
+  const calculateNotificationDates = (startDateStr: string, period: RecurrencePeriod): string[] => {
+    const dates: string[] = [];
+    
+    let count = 0;
+    if (period === 'monthly') count = 12;
+    else if (period === 'weekly') count = 48;
+    else if (period === 'yearly') count = 2;
+
+    const currentDate = new Date(startDateStr);
+    currentDate.setDate(currentDate.getDate() - 1);
+    currentDate.setHours(9, 0, 0, 0);
+
+    for (let i = 0; i < count; i++) {
+      dates.push(currentDate.toISOString());
+      if (period === 'monthly') {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+      } else if (period === 'weekly') {
+        currentDate.setDate(currentDate.getDate() + 7);
+      } else if (period === 'yearly') {
+        currentDate.setFullYear(currentDate.getFullYear() + 1);
+      }
+    }
+    return dates;
 };
 
   async function save() {
@@ -57,7 +83,7 @@ export default function AddSchedule({ history }: any) {
       description,
       period: recurrence,
       startDate: sdate,
-      notificationDate: calculateNotificationDate(sdate),
+      notificationDates: calculateNotificationDates(sdate, recurrence),
       timestamp: Date.now(),
     };
     await ScheduledTransactionsService.saveSchedule(new_schedule);
@@ -66,7 +92,7 @@ export default function AddSchedule({ history }: any) {
     window.dispatchEvent(
         new CustomEvent('schedules:updated', { detail: updated })
     );
-    await LocalNotificationService.scheduleReminder(description, calculateNotificationDate(sdate), new_schedule.id);
+    await LocalNotificationService.scheduleReminders(description, new_schedule.notificationDates, new_schedule.id);
     //toggle below comment for testing -
     //await LocalNotificationService.scheduleReminder(description, '2025-12-28T04:32:00.000Z');
     ionRouter.goBack();

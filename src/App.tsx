@@ -53,6 +53,7 @@ import './theme/variables.css';
 import AddSchedule from './pages/AddSchedule';
 import LocalNotificationService from './services/LocalNotificationService';
 import { useEffect } from 'react';
+import { RecurringSchedule } from './models/RecurringEntry';
 
 setupIonicReact();
 
@@ -171,6 +172,34 @@ const App: React.FC = () => {
 
    useEffect(() => {
     budgetProgressTracker();
+  }, []);
+
+  // update the latest notification batch dates
+  const updateNotificationsBatch = async () => {
+    const now = new Date();
+    const schedules = await ScheduledTransactionsService.loadSchedules();
+    const updated_schedules: RecurringSchedule[] = schedules.map((schedule) => {
+      let updated_dates = schedule.notificationDates.filter((datestr) => {
+        const notf_date = new Date(datestr);
+        if (notf_date > now) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      const sortedDates = updated_dates.sort((a, b) => 
+        new Date(a).getTime() - new Date(b).getTime()
+      );
+      return {
+        ...schedule,
+        notificationDates: sortedDates
+      }
+    });
+    await ScheduledTransactionsService.saveSchedulesBatch(updated_schedules);
+  }
+
+  useEffect(() => {
+    updateNotificationsBatch();
   }, []);
 
 
