@@ -138,6 +138,12 @@ const Tab3: React.FC = () => {
               <div style={{ padding: '0 5px' }}>
                 <IonProgressBar value={pval} color={pval < 1 ? 'success' : 'danger'} />
               </div>
+              <div style={{ height: '3px' }} />
+              {pval >= 1.0 && (
+                <div style={{ padding: '0 5px' }}>
+                  <IonLabel color='danger'>Budget limit reached!</IonLabel>
+                </div>
+              )}
       </IonContent>
       <IonLoading
       isOpen={showLoading}
