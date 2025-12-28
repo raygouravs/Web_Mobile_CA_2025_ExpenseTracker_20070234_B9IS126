@@ -84,15 +84,6 @@ export default function ScheduleListView(props: { schedules: RecurringSchedule[]
             <IonIcon slot="icon-only" icon={trash} />
             </IonItemOption>
           </IonItemOptions>
-
-          {/*
-          <IonItemOptions side="end">
-            <IonItemOption color="danger" onClick={() => handleDelete(e.id)}>
-              <IonIcon slot="icon-only" icon={trash} />
-            </IonItemOption>
-          </IonItemOptions>
-          */} 
-
         </IonItemSliding>
       ))}
     </IonList>

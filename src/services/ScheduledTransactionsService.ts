@@ -22,12 +22,12 @@ export default class ScheduledTransactionsService {
         });
     }
 
-    static deleteSchedule = async (id:string) => {
+    static deleteSchedule = async (id: string) => {
         const schedules = await this.loadSchedules();
-        schedules.filter(s => s.id !== id); 
+        const filteredSchedules = schedules.filter(s => s.id !== id);
         await Preferences.set({
             key: SCHEDULE_KEY,
-            value: JSON.stringify(schedules)
+            value: JSON.stringify(filteredSchedules)
         });
     }
 }
