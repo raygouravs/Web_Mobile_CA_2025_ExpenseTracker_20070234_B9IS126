@@ -10,6 +10,7 @@ import ScheduledTransactionsService from '../services/ScheduledTransactionsServi
 import { useIonRouter } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import { useEffect } from 'react';
+import LocalNotificationService from '../services/LocalNotificationService';
 
 const Tab4: React.FC = () => {
   const ionRouter = useIonRouter();
@@ -28,8 +29,20 @@ const Tab4: React.FC = () => {
     setSchedules(scheds);
   }
 
+  const checkNotificationPermissions = async () => {
+    const hasPermission = await LocalNotificationService.checkNotificationPermission();
+    if (!hasPermission) {
+        const granted = await LocalNotificationService.requestNotificationPermission();
+        if (!granted) {
+          console.warn('Notification permission denied');
+          window.alert('Please enable notifications for this app from Settings!')
+        }
+    }
+  }
+
   useIonViewWillEnter(() => {
     loadView();
+    checkNotificationPermissions();
   });
 
   return (
