@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonIcon, IonLabel, IonSegment, IonSegmentButton, SegmentChangeEventDetail } from '@ionic/react';
+import { IonContent, IonIcon, IonItem, IonLabel, IonSegment, IonSegmentButton, SegmentChangeEventDetail } from '@ionic/react';
 import { useState } from 'react';
 import CategoriesToggle from './CategoriesToggle';
 import { DoughnutData } from '../utils/utilitymethods';
@@ -35,6 +35,18 @@ function WalletBottomHalfComponent(props: { expenseDoughnutdata: DoughnutData, i
     <>
       <CategoriesToggle value={filter} onChange={setFilter} />
       <div style={{ height: '20px' }} />
+      {filter === 'expenses' && props.expenseDoughnutdata.datasets[0].data.length === 0 && (
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <IonLabel color='dark'>No data available! Add some entries!</IonLabel>
+        </div>
+      )}
+
+      {filter === 'income' && props.incomeDoughnutdata.datasets[0].data.length === 0 && (
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <IonLabel color='dark'>No data available! Add some entries!</IonLabel>
+        </div>
+      )}
+
       {filter === 'expenses' && (
         // show doughnut chart for expenses
           <div style={{ 
