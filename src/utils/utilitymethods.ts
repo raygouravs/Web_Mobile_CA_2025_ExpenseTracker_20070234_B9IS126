@@ -25,6 +25,13 @@ export interface DoughnutData {
   }[]
 }
 
+export interface MonthlyBudget {
+  amount: number;
+  month: string; // MM
+  year: string; // YYYY
+}
+
+
 
 export const showToast = async (desc: string, duration: 'short' | 'long') => {
   await Toast.show({

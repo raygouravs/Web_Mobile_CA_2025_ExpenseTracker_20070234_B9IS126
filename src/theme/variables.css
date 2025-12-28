@@ -57,3 +57,11 @@ ion-segment {
   margin-right: 10px;  
   width: calc(100% - 20px);
 }
+
+ion-progress-bar {
+  height: 15px; 
+  border-radius: 8px; 
+  --progress-background: #e5e7eb;      
+  --progress-bar-background: #22c55e;  
+}
+
