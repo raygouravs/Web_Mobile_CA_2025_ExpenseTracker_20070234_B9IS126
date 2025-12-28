@@ -56,17 +56,21 @@ export default function ScheduleListView(props: { schedules: RecurringSchedule[]
                </p>
               
               <p style={{ fontSize: '0.95rem', color: '#666', marginBottom: '4px' }}>
-                Start date - {formatDateString(e.startDate)}
+                Start date: {formatDateString(e.startDate)}
+              </p>
+
+              <p style={{ fontSize: '0.95rem', color: '#666', marginBottom: '4px' }}>
+                🔔 Notification on: {formatDateString(e.notificationDate.split('T')[0])}
               </p>
 
               {e.endDate && (
                 <p style={{ fontSize: '0.95rem', color: '#666', marginBottom: '4px' }}>
-                    End date - {formatDateString(e.endDate)}
+                    End date: {formatDateString(e.endDate)}
                 </p>
               )}
               
               <h2 style={{ fontWeight: '700', color: '#000', fontSize: '0.95rem', marginBottom: '4px' }}>
-                {e.period}
+                Repeats {e.period}
               </h2>
               <p style={{ fontSize: '0.95rem', color: '#000', marginBottom: '4px' }}>
                 <b>Category:</b> {e.categoryOrSource}
