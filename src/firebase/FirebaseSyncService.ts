@@ -24,7 +24,7 @@ export class FirebaseSyncService {
     const isOnline = await NetworkConnectivity.isNetworkAvailable();
 
     if(!isOnline) {
-        window.alert('No internet connectivity! Please try again!');
+        showToast('No internet connectivity! Please try again!', 'short');
         return;
     }
 
@@ -63,7 +63,7 @@ export class FirebaseSyncService {
     const isOnline = await NetworkConnectivity.isNetworkAvailable();
 
     if(!isOnline) {
-        window.alert('No internet connectivity! Please try again!');
+        showToast('No internet connectivity! Please try again!', 'short');
         return;
     }
 
