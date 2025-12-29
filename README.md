@@ -92,7 +92,7 @@ The application is built and tested to follow the latest Android architectural s
 
 **Optimized for API 33+:** The project is fully compatible with **Android 13 (Tiramisu)**, **Android 14 (Upside Down Cake)**, and the latest **Android 15 (Vanilla Ice Cream)**.
 
-**Note:** The current version is best viewed in light-mode.
+**Note:** The current version is best viewed in **light-mode**.
 
 
 ### How to Install
