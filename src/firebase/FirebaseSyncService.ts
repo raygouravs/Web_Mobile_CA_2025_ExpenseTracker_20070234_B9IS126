@@ -23,7 +23,7 @@ export class FirebaseSyncService {
 
     const isOnline = await NetworkConnectivity.isNetworkAvailable();
 
-    if(!isOnline) {
+    if(isOnline === false) {
         showToast('No internet connectivity! Please try again!', 'short');
         return;
     }
@@ -44,7 +44,7 @@ export class FirebaseSyncService {
         await uploadString(storageRef, localFile.data as string, 'raw', {
           contentType: 'application/json'
         });
-
+    
       } catch (err) {
         console.warn(`Skipping upload for ${fileName}`, err);
       }
@@ -62,7 +62,7 @@ export class FirebaseSyncService {
 
     const isOnline = await NetworkConnectivity.isNetworkAvailable();
 
-    if(!isOnline) {
+    if(isOnline === false) {
         showToast('No internet connectivity! Please try again!', 'short');
         return;
     }

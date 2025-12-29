@@ -3,6 +3,7 @@
 */
 
 import { Network } from '@capacitor/network';
+import { showToast } from '../utils/utilitymethods';
 
 export class NetworkConnectivity {
     static async isNetworkAvailable(): Promise<boolean> {
