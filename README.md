@@ -111,3 +111,23 @@ The application is built and tested to follow the latest Android architectural s
 * `android/`: The native Android Studio project folder.
 
 ---
+
+## REFERENCES:
+
+	1.	Ionic (2025) Segment UI Component. Available at: https://ionicframework.com/docs/api/segment
+	2.	Ionic (2025) ION LIST UI Component. Available at: https://ionicframework.com/docs/api/list
+	3.	Ionic (2025) IonItemSliding UI Component. Available at: https://ionicframework.com/docs/api/item-sliding
+	4.	Ionic (2025) Segment UI Component. Available at: https://ionicframework.com/docs/api/segment
+	5.	NPM (2025) react-chartjs-2 docs. Available at: https://www.npmjs.com/package/react-chartjs-2
+	6.	Firebase (2025) Firebase JavaScript API reference. Available at: https://firebase.google.com/docs/reference/js/storage.md?authuser=0#storage_package
+	7.	Ionic (2025) IonSelect UI Component. Available at: https://ionicframework.com/docs/api/select
+	8.	Ionic (2025) Ion Fab UI component. Available at: https://ionicframework.com/docs/api/fab
+	9.	Ionic (2025) ion-progress-bar api docs. Available at: https://ionicframework.com/docs/api/progress-bar
+	10.	Ionic (2025) @capacitor/device plugin. Available at: https://capacitorjs.com/docs/apis/device
+	11.	Ionic (2025) Filesystem Capacitor Plugin API. Available at: https://ionicframework.com/docs/native/filesystem
+	12.	Ionic (2025) Local Notifications Native Plugin, docs Available at: https://ionicframework.com/docs/native/local-notifications
+	13.	Ionic (2025) Network Capacitor Plugin API. Available at: https://ionicframework.com/docs/native/network
+	14.	Ionic (2025) Preferences Capacitor Plugin. Available at: https://capacitorjs.com/docs/apis/preferences
+	15.	Ionic (2025) Haptics Capacitor Plugin API. Available at: https://ionicframework.com/docs/native/haptics
+
+  ---
