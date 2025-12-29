@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">GR Expense Tracker</string>
-    <string name="title_activity_main">B9IS126_Web_Mobile_CA_2025_ExpenseTracker_20070234</string>
+    <string name="title_activity_main">GR Expense Tracker B9IS126_Web_Mobile_CA_2025_20070234</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
 </resources>
