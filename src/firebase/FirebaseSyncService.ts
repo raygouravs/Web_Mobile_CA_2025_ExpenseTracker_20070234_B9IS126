@@ -7,6 +7,7 @@ import { storage } from '../firebase/firebaseConfig';
 import DeviceIdentifierService from '../services/DeviceIdentifierService';
 import { NetworkConnectivity } from '../services/NetworkService';
 import { DiskStorageService } from '../services/DiskStorageService';
+import { showToast } from '../utils/utilitymethods';
 
 
 export class FirebaseSyncService {
@@ -58,6 +59,13 @@ export class FirebaseSyncService {
     let FILES: string[] = [];
     
     FILES = DiskStorageService.getUserDataFileNames();
+
+    const isOnline = await NetworkConnectivity.isNetworkAvailable();
+
+    if(!isOnline) {
+        window.alert('No internet connectivity! Please try again!');
+        return;
+    }
 
     for (const fileName of FILES) {
       try {
