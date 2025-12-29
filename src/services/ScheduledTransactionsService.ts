@@ -8,6 +8,8 @@ import LocalNotificationService from '../services/LocalNotificationService';
 
 const SCHEDULE_KEY = 'recurring_transactions';
 const BUDGET_KEY_PREFIX = 'budget_'; // 'bugdet_2025_12'
+const DEVICE_ID_KEY = 'device-id';
+const FIRST_LAUNCH_FLAG = 'firstlaunch';
 
 export default class ScheduledTransactionsService {
 
@@ -82,6 +84,38 @@ export default class ScheduledTransactionsService {
     static getNotificationIDsBySchedID = async (schedID:string): Promise<number[]> => {
         const { value } = await Preferences.get({ key: schedID });
         return value ? JSON.parse(value) : [];
+    }
+
+    //store the Device ID
+    static storeDeviceIdentifier = async (deviceID:string) => {
+        await Preferences.set({
+            key: DEVICE_ID_KEY,
+            value: JSON.stringify(deviceID)
+        });
+    }
+
+    //get the Device ID
+    static getDeviceIdentifier = async (): Promise<string> => {
+        const {value} = await Preferences.get({
+            key: DEVICE_ID_KEY
+        })
+        return value ?? '';
+    }
+
+    //get first launch flag
+    static getFirstLaunchFlag = async (): Promise<boolean> => {
+        const {value} = await Preferences.get({
+            key: FIRST_LAUNCH_FLAG
+        })
+        return Boolean(value) ?? true;
+    }
+
+    //store first launch
+    static storeFirstLaunchFlag = async () => {
+        await Preferences.set({
+            key: FIRST_LAUNCH_FLAG,
+            value: String(false)
+        });
     }
 }
 

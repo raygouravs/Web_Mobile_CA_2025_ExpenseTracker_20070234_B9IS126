@@ -17,6 +17,10 @@ export class DiskStorageService {
   private static FILE_NAME = 'user_expense_data.json';
   private static PAST_DATA_FILE_NAME_PREFIX: string = 'user_past_data_';
 
+  static getUserDataFileNames(): string[] {
+    return [this.FILE_NAME, this.pastDataFileNameGenerator()]
+  }
+
   private static pastDataFileNameGenerator() {
     const todaysDate: string = new Date().toISOString().split('T')[0];
     // "2025-12-26"
@@ -125,7 +129,7 @@ export class DiskStorageService {
         await Filesystem.writeFile({
           path: DiskStorageService.FILE_NAME,
           data: JSON.stringify(filtered_data),
-         directory: this.DEFAULT_DIR,
+          directory: this.DEFAULT_DIR,
           encoding: Encoding.UTF8,
         });
         console.log(`${DiskStorageService.FILE_NAME} saved successfully.`);      

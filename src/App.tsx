@@ -202,6 +202,18 @@ const App: React.FC = () => {
     //updateNotificationsBatch(); ///check later
   }, []);
 
+  async function syncDataWithCLoudStorage() {
+    const first_launch = await ScheduledTransactionsService.getFirstLaunchFlag();
+    if(first_launch){
+      await ScheduledTransactionsService.storeFirstLaunchFlag();
+    }
+    //MARK: complete this...
+  }
+
+  useEffect(() => {
+    syncDataWithCLoudStorage();
+  }, [])
+
 
   return (
     <IonApp>
