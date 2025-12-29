@@ -1,5 +1,24 @@
 # GR Expense Tracker
 
+## Academic Project Information
+
+**Web and Mobile Technologies CA 2025**
+
+**Module Title:** Web and Mobile Technologies
+
+**Module Code:** B9IS126
+
+**Module Leader:** Ehtisham Yasin
+
+**Student Name:** Gourav Sankar Ray
+
+**Student Number:** 20070234
+
+**Institution:** Dublin Business School
+
+---
+
+## 📱 Project Description
 A user-friendly mobile app focused on privacy that helps you manage your finances. GR Expense Tracker offers a sleek and simple interface to keep track of your cash flow, visualize your spending habits, and ensure your data is safely backed up.
 
 ---
