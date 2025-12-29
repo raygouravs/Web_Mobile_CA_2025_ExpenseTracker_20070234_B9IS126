@@ -28,6 +28,7 @@ A user-friendly mobile app focused on privacy that helps you manage your finance
 This project is developed with the **Ionic Framework** using **React** and **TypeScript** for robust development.
 
 * **Frontend:** React, TypeScript, HTML5, CSS3
+* **MBaaS:** Firebase cloud storage
 * **Framework:** Ionic Framework (Mobile UI components)
 * **Native Engine:** Capacitor
 * **Capacitor Plugins:**
