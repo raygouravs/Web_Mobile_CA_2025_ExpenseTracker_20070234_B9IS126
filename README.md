@@ -123,7 +123,7 @@ The application is built and tested to follow the latest Android architectural s
 
 * `src/components`: Reusable UI elements (Segment Control, Dynamic List Views).
 * `src/pages`: Main views (Timeline, Wallet, Schedule, Settings).
-* `src/services`: Logic for Filesystem, Firebase Sync, Shared Preferences Manager, Network status, Device Identifer Manager, Disk Storage Manager and Haptics Service.
+* `src/services`: Logic for the Filesystem, Firebase Sync, Shared Preferences Manager, Network status, Device Identifer Manager, Disk Storage Manager and Haptics Services.
 * `android/`: The native Android Studio project folder.
 
 ---
